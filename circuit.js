@@ -117,7 +117,7 @@ export function initCircuit(scene) {
             if (from.x > to.x) {
                 dist = from.x - to.x
 
-                for (let x = from.x - radius; x >= to.x + radius; x -= 2 * radius) {
+                for (let x = from.x - radius; x >= to.x + radius; x -= 2 * radius + 5) {
                     let mesh = new THREE.Mesh(sphereGeometry, material)
                     mesh.position.set(x, from.y, from.z)
                     scene.add(mesh)
@@ -126,7 +126,7 @@ export function initCircuit(scene) {
             } else {
                 dist = to.x - from.x
 
-                for (let x = from.x + radius; x <= to.x - radius; x += 2 * radius) {
+                for (let x = from.x + radius; x <= to.x - radius; x += 2 * radius + 5) {
                     let mesh = new THREE.Mesh(sphereGeometry, material)
                     mesh.position.set(x, from.y, from.z)
                     scene.add(mesh)
@@ -137,7 +137,7 @@ export function initCircuit(scene) {
         else if (from.z != to.z) {
             dist = to.z - to.z
 
-            for (let z = from.z + radius; z <= to.z - radius; z += 2 * radius) {
+            for (let z = from.z + radius; z <= to.z - radius; z += 2 * radius + 5) {
                 let mesh = new THREE.Mesh(sphereGeometry, material)
                 mesh.position.set(from.x, from.y, z)
                 scene.add(mesh)
@@ -149,5 +149,12 @@ export function initCircuit(scene) {
 
 export function updateCircuit() {
 
-
+    for (let edge of edges){
+        for (let i = 0; i < edge.spheres.length-1; i++){
+            if (edge.spheres[i].material.color != edge.spheres[i+1].material.color){
+                edge.spheres[i+1].material.color.set(edge.spheres[i].color);
+                break;
+            }
+        }
+    }
 }

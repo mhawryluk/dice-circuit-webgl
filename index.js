@@ -1,5 +1,5 @@
-import initBoxes from "./binaryBox.js"
-import {initCircuit, updateCircuit} from "./circuit.js"
+import { initBoxes, setValueBoxes } from "./binaryBox.js"
+import { initCircuit, updateCircuit } from "./circuit.js"
 
 let container, stats, controls;
 let camera, scene, renderer, light;
@@ -25,11 +25,7 @@ function init() {
     // scene.add(createGround());
     // scene.add(createSkyBox());
 
-    binaryBoxes = initBoxes();
-    for (let box of binaryBoxes){
-        scene.add(box);
-    }
-
+    initBoxes(scene);
     initCircuit(scene);
 
     createRenderer();
@@ -37,12 +33,8 @@ function init() {
 
     window.addEventListener('resize', onWindowResize, false);
 
-    // stats
-    stats = new Stats();
-    container.appendChild(stats.dom);
-
-    const axesHelper = new THREE.AxesHelper( 500 );
-    scene.add( axesHelper );
+    const axesHelper = new THREE.AxesHelper(500);
+    scene.add(axesHelper);
 
 }
 
@@ -51,10 +43,10 @@ function animate() {
 
     requestAnimationFrame(animate);
 
-    var delta = clock.getDelta();
+    updateCircuit();
+    // setValueBoxes(Math.floor(Math.random() * 6));
 
     renderer.render(scene, camera);
-    stats.update();
 
     // console.log(camera);
 }
@@ -67,7 +59,7 @@ function cameraInit() {
 
     // camera.position.set( 20, 20, 20 ); // all components equal
     // camera.lookAt( 0, 0, 0); // or the origin
-    
+
 
     camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
     camera.position.set(-139, 174, -50);
@@ -100,7 +92,7 @@ function createGround() {
     return mesh;
 }
 
-function createSkyBox(){
+function createSkyBox() {
 
     let skyGeometry = new THREE.CubeGeometry(2000, 2000, 2000);
 
@@ -117,7 +109,7 @@ function createSkyBox(){
     return skyBox;
 }
 
-function createRenderer(){
+function createRenderer() {
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -125,7 +117,7 @@ function createRenderer(){
     container.appendChild(renderer.domElement);
 }
 
-function createControls(){
+function createControls() {
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 100, 0);
     controls.update();
