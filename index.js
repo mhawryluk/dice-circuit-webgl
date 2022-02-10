@@ -1,4 +1,5 @@
 import initBoxes from "./binaryBox.js"
+import {initCircuit, updateCircuit} from "./circuit.js"
 
 let container, stats, controls;
 let camera, scene, renderer, light;
@@ -8,7 +9,7 @@ const clock = new THREE.Clock();
 let binaryBoxes;
 
 init();
-// animate();
+animate();
 
 
 function init() {
@@ -29,6 +30,7 @@ function init() {
         scene.add(box);
     }
 
+    initCircuit(scene);
 
     createRenderer();
     createControls();

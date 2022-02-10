@@ -1,6 +1,7 @@
 let cubeSize = 10;
+let squareSize = 10;
 let xRange = 100;
-let positions = [new THREE.Vector3(25, cubeSize / 2, 0), new THREE.Vector3(50, cubeSize / 2, 0), new THREE.Vector3(75, cubeSize / 2, 0)];
+let positions = [new THREE.Vector3(4*squareSize, cubeSize / 2, 0), new THREE.Vector3(8*squareSize, cubeSize / 2, 0), new THREE.Vector3(12*squareSize, cubeSize / 2, 0)];
 
 
 export default function initBoxes(value = 6) {
