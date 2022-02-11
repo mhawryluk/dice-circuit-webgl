@@ -4,7 +4,7 @@ let xRange = 100;
 let positions = [new THREE.Vector3(4 * squareSize, cubeSize / 2, 0), new THREE.Vector3(8 * squareSize, cubeSize / 2, 0), new THREE.Vector3(12 * squareSize, cubeSize / 2, 0)];
 let boxes = [];
 
-export function initBoxes(scene, value = 6) {
+export function initBoxes(scene, value = 0) {
     let cubeGeom = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
 
     for (let i = 0; i < 3; i++) {

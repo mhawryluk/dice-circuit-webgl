@@ -10,14 +10,19 @@ class Vertex {
         this.x = i * size
         this.y = k * size
         this.z = j * size
-        this.edges = []
+        this.inEdges = []
+        this.outEdges = []
         this.gate = null
         this.voltage = 0
     }
 
-    addEdge(vertex) {
-        this.edges.push(vertex);
+    addOutEdge(vertex) {
+        this.outEdges.push(vertex);
         edges.push(new Edge(this, vertex))
+    }
+
+    addInEdge(vertex) {
+        this.inEdges.push(vertex);
     }
 }
 
@@ -75,7 +80,8 @@ function addEdge(from_i, from_j, from_k, to_i, to_j, to_k) {
         if (to_i == vertex.i && to_j == vertex.j && to_k == vertex.k) to = vertex
     }
 
-    from.addEdge(to)
+    from.addOutEdge(to)
+    to.addInEdge(from)
 }
 
 addEdge(12, 0, 0, 12, 14, 0)
@@ -149,12 +155,19 @@ export function initCircuit(scene) {
 
 export function updateCircuit() {
 
-    for (let edge of edges){
-        for (let i = 0; i < edge.spheres.length-1; i++){
-            if (edge.spheres[i].material.color != edge.spheres[i+1].material.color){
-                edge.spheres[i+1].material.color.set(edge.spheres[i].color);
+    for (let edge of edges) {
+        for (let i = 0; i < edge.spheres.length - 1; i++) {
+            if (edge.spheres[i].material.color != edge.spheres[i + 1].material.color) {
+                edge.spheres[i + 1].material.color.set(edge.spheres[i].color);
                 break;
             }
         }
+    }
+}
+
+export function setValueCircuit(value) {
+    for (let i = 0; i < 3; i++) {
+        vertices[i].voltage = value % 2;
+        value = Math.floor(value / 2);
     }
 }

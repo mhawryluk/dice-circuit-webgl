@@ -1,6 +1,6 @@
 body {
 	margin: 0;
-	background-color: #000;
+	background-color: rgb(255, 255, 255);
 	color: #fff;
 	font-family: Monospace;
 	font-size: 13px;
@@ -24,7 +24,7 @@ button {
 
 canvas {
 	display: block;
-}
+} */
 
 #info {
 	position: absolute;

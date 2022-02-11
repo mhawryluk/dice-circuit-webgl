@@ -1,12 +1,13 @@
 import { initBoxes, setValueBoxes } from "./binaryBox.js"
-import { initCircuit, updateCircuit } from "./circuit.js"
+import { initCircuit, updateCircuit, setValueCircuit } from "./circuit.js"
 
-let container, stats, controls;
+let container, controls;
 let camera, scene, renderer, light;
 
 const clock = new THREE.Clock();
 
 let binaryBoxes;
+let value = 0;
 
 init();
 animate();
@@ -14,8 +15,7 @@ animate();
 
 function init() {
 
-    container = document.createElement('div');
-    document.body.appendChild(container);
+    container = document.getElementById('animation');
 
     scene = new THREE.Scene();
 
@@ -31,8 +31,6 @@ function init() {
     createRenderer();
     createControls();
 
-    window.addEventListener('resize', onWindowResize, false);
-
     const axesHelper = new THREE.AxesHelper(500);
     scene.add(axesHelper);
 
@@ -44,8 +42,13 @@ function animate() {
     requestAnimationFrame(animate);
 
     updateCircuit();
-    // setValueBoxes(Math.floor(Math.random() * 6));
 
+    let enteredValue = document.getElementById('number').value
+    if (enteredValue != value){
+        setValueBoxes(enteredValue);
+        value = enteredValue;
+        setValueCircuit(value);
+    }
     renderer.render(scene, camera);
 
     // console.log(camera);
@@ -112,7 +115,7 @@ function createSkyBox() {
 function createRenderer() {
     renderer = new THREE.WebGLRenderer({ antialias: true });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(800, 500);
     renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
 }
@@ -121,11 +124,5 @@ function createControls() {
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 100, 0);
     controls.update();
-}
-
-function onWindowResize() {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
 }
 
