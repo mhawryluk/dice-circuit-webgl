@@ -10,19 +10,21 @@ class Vertex {
         this.x = i * size
         this.y = k * size
         this.z = j * size
-        this.inEdges = []
+        this.inEdge;
         this.outEdges = []
         this.gate = null
         this.voltage = 0
     }
 
     addOutEdge(vertex) {
-        this.outEdges.push(vertex);
-        edges.push(new Edge(this, vertex))
+        let edge = new Edge(this, vertex)
+        this.outEdges.push(edge)
+        vertex.addInEdge(edge)
+        edges.push(edge)
     }
 
-    addInEdge(vertex) {
-        this.inEdges.push(vertex);
+    addInEdge(edge) {
+        this.inEdge = edge;
     }
 }
 
@@ -81,7 +83,6 @@ function addEdge(from_i, from_j, from_k, to_i, to_j, to_k) {
     }
 
     from.addOutEdge(to)
-    to.addInEdge(from)
 }
 
 addEdge(12, 0, 0, 12, 14, 0)
@@ -111,7 +112,6 @@ export function initCircuit(scene) {
 
     const radius = 1
     const sphereGeometry = new THREE.SphereGeometry(2, 10, 6)
-    const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
 
     for (let edge of edges) {
         let from = edge.from
@@ -124,6 +124,7 @@ export function initCircuit(scene) {
                 dist = from.x - to.x
 
                 for (let x = from.x - radius; x >= to.x + radius; x -= 2 * radius + 5) {
+                    let material = new THREE.MeshBasicMaterial({ color: 0x888888 })
                     let mesh = new THREE.Mesh(sphereGeometry, material)
                     mesh.position.set(x, from.y, from.z)
                     scene.add(mesh)
@@ -133,6 +134,7 @@ export function initCircuit(scene) {
                 dist = to.x - from.x
 
                 for (let x = from.x + radius; x <= to.x - radius; x += 2 * radius + 5) {
+                    let material = new THREE.MeshBasicMaterial({ color: 0x888888 })
                     let mesh = new THREE.Mesh(sphereGeometry, material)
                     mesh.position.set(x, from.y, from.z)
                     scene.add(mesh)
@@ -144,6 +146,7 @@ export function initCircuit(scene) {
             dist = to.z - to.z
 
             for (let z = from.z + radius; z <= to.z - radius; z += 2 * radius + 5) {
+                let material = new THREE.MeshBasicMaterial({ color: 0x888888 })
                 let mesh = new THREE.Mesh(sphereGeometry, material)
                 mesh.position.set(from.x, from.y, z)
                 scene.add(mesh)
@@ -157,9 +160,26 @@ export function updateCircuit() {
 
     for (let edge of edges) {
         for (let i = 0; i < edge.spheres.length - 1; i++) {
-            if (edge.spheres[i].material.color != edge.spheres[i + 1].material.color) {
-                edge.spheres[i + 1].material.color.set(edge.spheres[i].color);
+            if (edge.spheres[i].material.color.getHex() != edge.spheres[i + 1].material.color.getHex()) {
+                edge.spheres[i + 1].material.color.copy(edge.spheres[i].material.color);
                 break;
+            }
+        }
+    }
+
+
+    for (let vertex of vertices){
+        if (vertex.inEdge != undefined){
+            for (let edge of vertex.outEdges){
+                edge.spheres[0].material.color.copy(vertex.inEdge.spheres[vertex.inEdge.spheres.length-1].material.color)
+            }
+        } else {
+            for (let edge of vertex.outEdges){
+                // console.log(vertex.voltage)
+                let color;
+                if (vertex.voltage == 0) color = 0xFF00FF
+                else color = 0x00FF00
+                edge.spheres[0].material.color.set(color)
             }
         }
     }
