@@ -1,5 +1,8 @@
 import { Gate } from "./gates.js"
 
+const level1 = 4
+const backx = 15
+
 const edges = []
 const vertices = []
 const gates = []
@@ -100,6 +103,24 @@ vertices.push(new Vertex(12, 14)) //21
 vertices.push(new Vertex(6, 15)) //22
 vertices.push(new Vertex(2, 16)) //23
 
+
+vertices.push(new Vertex(6, 10, level1)) //17
+vertices.push(new Vertex(2, 11, level1)) //18
+vertices.push(new Vertex(10, 12, level1)) //19
+vertices.push(new Vertex(10, 13, level1)) //20
+vertices.push(new Vertex(12, 14, level1)) //21
+vertices.push(new Vertex(6, 15, level1)) //22
+vertices.push(new Vertex(2, 16, level1)) //23
+
+
+vertices.push(new Vertex(backx, 10, level1)) //17
+vertices.push(new Vertex(backx, 11, level1)) //18
+vertices.push(new Vertex(backx, 12, level1)) //19
+vertices.push(new Vertex(backx, 13, level1)) //20
+vertices.push(new Vertex(backx, 14, level1)) //21
+vertices.push(new Vertex(backx, 15, level1)) //22
+vertices.push(new Vertex(backx, 16, level1)) //23
+
 // GATES
 
 gates.push(new Gate(vertices[11], vertices[12], vertices[15], 'AND'))
@@ -122,13 +143,29 @@ addEdge(9, 4, 0, 9, 8, 0)
 addEdge(4, 0, 0, 2, 0, 0)
 addEdge(4, 0, 0, 4, 4, 0)
 addEdge(2, 0, 0, 2, 11, 0)
-addEdge(2, 0, 0, 2, 11, 0)
 addEdge(2, 11, 0, 2, 16, 0)
 addEdge(10, 9, 0, 10, 12, 0)
 addEdge(10, 12, 0, 10, 13, 0)
 addEdge(10, 12, 0, 10, 13, 0)
 addEdge(6, 9, 0, 6, 10, 0)
 addEdge(6, 10, 0, 6, 15, 0)
+
+addEdge(6, 10, 0, 6, 10, level1)
+addEdge(2, 11, 0, 2, 11, level1)
+addEdge(10, 12, 0, 10, 12, level1)
+addEdge(10, 13, 0, 10, 13, level1)
+addEdge(12, 14, 0, 12, 14, level1)
+addEdge(6, 15, 0, 6, 15, level1)
+addEdge(2, 16, 0, 2, 16, level1)
+
+
+addEdge(6, 10, level1, backx, 10, level1)
+addEdge(2, 11, level1, backx, 11, level1)
+addEdge(10, 12, level1, backx, 12, level1)
+addEdge(10, 13, level1, backx, 13, level1)
+addEdge(12, 14, level1, backx, 14, level1)
+addEdge(6, 15, level1, backx, 15, level1)
+addEdge(2, 16, level1, backx, 16, level1)
 
 
 export function initCircuit(scene) {
@@ -174,14 +211,19 @@ export function initCircuit(scene) {
                     edge.spheres.push(mesh)
                 }
             }
-        }
-        else if (from.z != to.z) {
-            dist = to.z - to.z
-
+        } else if (from.z != to.z) {
             for (let z = from.z + radius; z <= to.z - radius; z += 2 * radius + 5) {
                 const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
                 const mesh = new THREE.Mesh(sphereGeometry, material)
                 mesh.position.set(from.x, from.y, z)
+                scene.add(mesh)
+                edge.spheres.push(mesh)
+            }
+        } else if (from.y != to.y) {
+            for (let y = from.y + radius; y <= to.y - radius; y += 2 * radius + 5) {
+                const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
+                const mesh = new THREE.Mesh(sphereGeometry, material)
+                mesh.position.set(from.x, y, from.z)
                 scene.add(mesh)
                 edge.spheres.push(mesh)
             }
