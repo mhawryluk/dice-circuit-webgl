@@ -65,7 +65,8 @@ function initCircuit(scene) {
 
     for (let gate of gates) {
         const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
-        const mesh = new THREE.Mesh(boxGeometry, material)
+        // const mesh = new THREE.Mesh(boxGeometry, material)
+        const mesh = createMesh(boxGeometry, "CircuitBoard_512_albedo.png", "CircuitBoard_512_normal.png")
 
         mesh.position.set(gate.x, gate.y, gate.z)
 

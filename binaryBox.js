@@ -9,11 +9,12 @@ function initBoxes(scene) {
 
     for (let i = 0; i < 3; i++) {
 
-        var cubeMaterial = new THREE.MeshBasicMaterial({
-            color: 0x222222
-        });
+        // var cubeMaterial = new THREE.MeshBasicMaterial({
+        //     color: 0x222222
+        // });
 
-        let cube = new THREE.Mesh(cubeGeom, cubeMaterial)
+        // let cube = new THREE.Mesh(cubeGeom, cubeMaterial)
+        const cube = createMesh(cubeGeom, "CircuitBoard_512_albedo.png", "CircuitBoard_512_normal.png")
         cube.position.copy(positions[i])
         scene.add(cube)
         boxes.push(cube)

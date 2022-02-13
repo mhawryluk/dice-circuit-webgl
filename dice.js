@@ -8,9 +8,10 @@ class Dot {
         this.radius = 7
         const sphereGeometry = new THREE.SphereGeometry(this.radius, 10, 6)
         const material = new THREE.MeshBasicMaterial({ color: diceColors[0] })
-        const mesh = new THREE.Mesh(sphereGeometry, material)
+        const mesh = createMesh(sphereGeometry, "Plastic_Scratched_512_albedo.png", "Plastic_Scratched_512_normal.png")
+        // mesh = new THREE.Mesh(sphereGeometry, material)
         mesh.position.set(centerPos.x - diceWidth/2, centerPos.y - diceHeight / 4 + i * diceHeight / 4, centerPos.z - diceWidth / 4 + j * diceWidth / 4)
-
+        mesh.material.color.set(diceColors[0])
         this.sphere = mesh
         this.input = input
         this.voltage = 0
@@ -34,8 +35,8 @@ function initDice() {
     const material = new THREE.MeshBasicMaterial({ color: 0x111111 })
 
     // const boxMesh = new THREE.Mesh(boxGeometry, material)
-    // const boxMesh = createMesh(boxGeometry, "CircuitBoard_512_albedo.png", "CircuitBoard_512_normal.png", "CircuitBoard_512_bump.png")
-    const boxMesh = createMesh(boxGeometry, "metal-floor.jpg", "metal-floor-normal.jpg")
+    const boxMesh = createMesh(boxGeometry, "CircuitBoard_512_albedo.png", "CircuitBoard_512_normal.png")
+    // const boxMesh = createMesh(boxGeometry, "metal-floor.jpg", "metal-floor-normal.jpg")
 
     boxMesh.position.copy(centerPos)
 

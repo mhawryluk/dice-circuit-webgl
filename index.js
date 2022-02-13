@@ -19,7 +19,7 @@ function init() {
     cameraInit();
     lightsInit();
 
-    createGround();
+    // createGround();
     createSkyBox();
 
     initBoxes(scene);
@@ -85,7 +85,7 @@ function lightsInit() {
 function createGround() {
     const mesh = new THREE.Mesh(new THREE.PlaneBufferGeometry(512, 512), new THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: true }));
     mesh.receiveShadow = true;
-    mesh.position.x = - Math.pi/2;
+    mesh.position.x = - Math.pi / 2;
     // mesh.position.y -= 50;
 
     const texture = THREE.ImageUtils.loadTexture("textures/CircuitBoard_512_albedo.png");
@@ -98,19 +98,23 @@ function createGround() {
 
 function createSkyBox() {
 
-    let skyGeometry = new THREE.CubeGeometry(512, 512, 512);
+    let size = 512
+    let skyGeometry = new THREE.CubeGeometry(size, size, size);
 
     let materialArray = [];
     for (let j = 0; j < 6; j++)
         materialArray.push(new THREE.MeshBasicMaterial({
-            map: THREE.ImageUtils.loadTexture("textures/metal-floor.jpg"),
+            map: THREE.ImageUtils.loadTexture("textures/Scifi_Panel8_512_albedo.png"),
+            normalMap: THREE.ImageUtils.loadTexture("textures/Scifi_Panel8_512_normal.png"),
             side: THREE.BackSide
         }));
 
     var skyMaterial = new THREE.MeshFaceMaterial(materialArray);
     var skyBox = new THREE.Mesh(skyGeometry, skyMaterial);
 
-    skyBox.position.y -= 10;
+    skyBox.position.x += 100
+    skyBox.position.y += 100
+    skyBox.position.z += 100
 
     scene.add(skyBox);
 }
@@ -119,6 +123,7 @@ function createRenderer() {
     renderer = new THREE.WebGLRenderer({ antialias: false });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(500, 500);
+    renderer.setClearColor(0x666666, 1);
     renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
 }
@@ -135,14 +140,14 @@ function createMesh(geom, imageFile, normal) {
         var t = THREE.ImageUtils.loadTexture("textures/" + imageFile);
         var m = THREE.ImageUtils.loadTexture("textures/" + normal);
 
-        console.log(t, m)
+        // console.log(t, m)
         var mat2 = new THREE.MeshPhongMaterial({
             map: t,
             normalMap: m
         });
 
         var mesh = new THREE.Mesh(geom, mat2);
-        console.log(mesh)
+        // console.log(mesh)
         return mesh;
     } else {
         var t = THREE.ImageUtils.loadTexture("textures/" + imageFile);
