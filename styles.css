@@ -5,19 +5,31 @@ body {
     font-family: 'Montserrat', sans-serif;
 }
 
+canvas {
+    margin: auto;
+}
+
+#animation {
+    margin: auto
+}
+
 .main-component {
     background-color: inherit;
     margin: 20;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 2fr;
     grid-gap: 20px;
+    height: 100vh;
 }
 
 .label {
     display: block;
     text-align: center;
-    margin-top: 30%;
-    margin-bottom: 5%;
+    margin-bottom: 3vh;
+}
+
+#number {
+    margin-bottom: 10vh;
 }
 
 .input {
@@ -35,6 +47,12 @@ body {
     color: white;
     text-align: center;
     font-size: 30px;
+    margin-top: 30vh;
+    margin-bottom: 30vh;
     /* display: flex; */
+}
+
+.random-button{
+    font: inherit;
 }
 

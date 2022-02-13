@@ -2,13 +2,13 @@ let container, controls;
 let camera, scene, renderer, light;
 
 const clock = new THREE.Clock();
+const inputBox = document.getElementById('number')
 
 let binaryBoxes;
 let value = 0;
 
 init();
 animate();
-
 
 function init() {
 
@@ -41,7 +41,8 @@ function animate() {
     updateCircuit();
     updateDice();
 
-    let enteredValue = document.getElementById('number').value
+    const enteredValue = inputBox.value
+
     if (enteredValue != value) {
         setValueBoxes(enteredValue);
         value = enteredValue;
@@ -85,7 +86,8 @@ function lightsInit() {
 function createGround() {
     const mesh = new THREE.Mesh(new THREE.PlaneBufferGeometry(512, 512), new THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: true }));
     mesh.receiveShadow = true;
-    mesh.position.x = - Math.pi / 2;
+    mesh.position.z = - Math.PI / 2;
+    mesh.position.x = - Math.PI / 2;
     // mesh.position.y -= 50;
 
     const texture = THREE.ImageUtils.loadTexture("textures/CircuitBoard_512_albedo.png");
@@ -99,7 +101,7 @@ function createGround() {
 function createSkyBox() {
 
     let size = 512
-    let skyGeometry = new THREE.CubeGeometry(size, size, size);
+    let skyGeometry = new THREE.CubeGeometry(size, size / 2, size);
 
     let materialArray = [];
     for (let j = 0; j < 6; j++)
@@ -159,5 +161,11 @@ function createMesh(geom, imageFile, normal) {
     }
 
     return mesh;
+}
+
+
+function randomNumber() {
+    const number = Math.min(6, 1 + Math.floor(Math.random() * 6))
+    inputBox.value = number
 }
 

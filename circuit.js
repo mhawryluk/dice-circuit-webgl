@@ -6,7 +6,7 @@ const vertices = []
 const gates = []
 
 
-const voltageColors = [0x202020, 0x0000DD]
+const voltageColors = [0x202020, 0x00DD00]
 
 class Vertex {
     constructor(i, j, k = 0) {
