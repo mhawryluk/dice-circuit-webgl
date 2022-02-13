@@ -1,4 +1,4 @@
-export class Gate {
+class Gate {
     constructor(inVertex1, inVertex2, outVertex, type) {
         this.in1 = inVertex1
         this.in2 = inVertex2

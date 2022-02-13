@@ -1,6 +1,3 @@
-import { initBoxes, setValueBoxes } from "./binaryBox.js"
-import { initCircuit, updateCircuit, setValueCircuit } from "./circuit.js"
-
 let container, controls;
 let camera, scene, renderer, light;
 
@@ -31,9 +28,8 @@ function init() {
     createRenderer();
     createControls();
 
-    const axesHelper = new THREE.AxesHelper(500);
-    scene.add(axesHelper);
-
+    // const axesHelper = new THREE.AxesHelper(500);
+    // scene.add(axesHelper);
 }
 
 
@@ -113,7 +109,7 @@ function createSkyBox() {
 }
 
 function createRenderer() {
-    renderer = new THREE.WebGLRenderer({ antialias: true });
+    renderer = new THREE.WebGLRenderer({ antialias: false });
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(800, 500);
     renderer.shadowMap.enabled = true;
