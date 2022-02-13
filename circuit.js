@@ -7,8 +7,8 @@ const gates = []
 
 
 const voltageColors = {
-    0: 0xFF00FF,
-    1: 0x00FF00,
+    0: 0x101010,
+    1: 0xDDDD00,
 }
 
 class Vertex {

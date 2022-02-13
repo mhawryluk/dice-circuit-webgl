@@ -24,6 +24,7 @@ function init() {
 
     initBoxes(scene);
     initCircuit(scene);
+    initDice();
 
     createRenderer();
     createControls();
@@ -38,9 +39,10 @@ function animate() {
     requestAnimationFrame(animate);
 
     updateCircuit();
+    updateDice();
 
     let enteredValue = document.getElementById('number').value
-    if (enteredValue != value){
+    if (enteredValue != value) {
         setValueBoxes(enteredValue);
         value = enteredValue;
         setValueCircuit(value);

@@ -59,8 +59,8 @@ vertices.push(new Vertex(backx, 16, level1)) //23
 
 // GATES
 
-gates.push(new Gate(vertices[11], vertices[12], vertices[15], 'AND'))
-gates.push(new Gate(vertices[13], vertices[14], vertices[16], 'OR'))
+gates.push(new Gate(vertices[11], vertices[12], vertices[15], 'OR'))
+gates.push(new Gate(vertices[13], vertices[14], vertices[16], 'AND'))
 
 // EDGES
 
