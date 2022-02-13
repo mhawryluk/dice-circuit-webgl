@@ -19,8 +19,8 @@ function init() {
     cameraInit();
     lightsInit();
 
-    // scene.add(createGround());
-    // scene.add(createSkyBox());
+    createGround();
+    createSkyBox();
 
     initBoxes(scene);
     initCircuit(scene);
@@ -83,37 +83,42 @@ function lightsInit() {
 }
 
 function createGround() {
-    var mesh = new THREE.Mesh(new THREE.PlaneBufferGeometry(2000, 2000), new THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: true }));
-    mesh.rotation.x = - Math.PI / 2;
+    const mesh = new THREE.Mesh(new THREE.PlaneBufferGeometry(512, 512), new THREE.MeshPhongMaterial({ color: 0x999999, depthWrite: true }));
     mesh.receiveShadow = true;
+    mesh.position.x = - Math.pi/2;
+    // mesh.position.y -= 50;
 
-    let texture = THREE.ImageUtils.loadTexture("../textures/metal-rust.jpg");
+    const texture = THREE.ImageUtils.loadTexture("textures/CircuitBoard_512_albedo.png");
+    const normalTexture = THREE.ImageUtils.loadTexture("textures/metal-floor.jpg");
     mesh.material.map = texture;
+    mesh.material.normalMap = normalTexture;
 
-    return mesh;
+    scene.add(mesh)
 }
 
 function createSkyBox() {
 
-    let skyGeometry = new THREE.CubeGeometry(2000, 2000, 2000);
+    let skyGeometry = new THREE.CubeGeometry(512, 512, 512);
 
     let materialArray = [];
     for (let j = 0; j < 6; j++)
         materialArray.push(new THREE.MeshBasicMaterial({
-            map: THREE.ImageUtils.loadTexture("textures/metal-rust.jpg"),
+            map: THREE.ImageUtils.loadTexture("textures/metal-floor.jpg"),
             side: THREE.BackSide
         }));
 
     var skyMaterial = new THREE.MeshFaceMaterial(materialArray);
     var skyBox = new THREE.Mesh(skyGeometry, skyMaterial);
 
-    return skyBox;
+    skyBox.position.y -= 10;
+
+    scene.add(skyBox);
 }
 
 function createRenderer() {
     renderer = new THREE.WebGLRenderer({ antialias: false });
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(800, 500);
+    renderer.setSize(500, 500);
     renderer.shadowMap.enabled = true;
     container.appendChild(renderer.domElement);
 }
@@ -122,5 +127,32 @@ function createControls() {
     controls = new THREE.OrbitControls(camera, renderer.domElement);
     controls.target.set(0, 100, 0);
     controls.update();
+}
+
+function createMesh(geom, imageFile, normal) {
+
+    if (normal) {
+        var t = THREE.ImageUtils.loadTexture("textures/" + imageFile);
+        var m = THREE.ImageUtils.loadTexture("textures/" + normal);
+
+        console.log(t, m)
+        var mat2 = new THREE.MeshPhongMaterial({
+            map: t,
+            normalMap: m
+        });
+
+        var mesh = new THREE.Mesh(geom, mat2);
+        console.log(mesh)
+        return mesh;
+    } else {
+        var t = THREE.ImageUtils.loadTexture("textures/" + imageFile);
+        var mat1 = new THREE.MeshPhongMaterial({
+            map: t
+        })
+        var mesh = new THREE.Mesh(geom, mat1);
+        return mesh;
+    }
+
+    return mesh;
 }
 

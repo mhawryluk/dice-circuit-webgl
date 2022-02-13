@@ -5,15 +5,19 @@
 	<title>Dice Circuit</title>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
-	<!-- <link type="text/css" rel="stylesheet" href="main.css"> -->
+	<link type="text/css" rel="stylesheet" href="styles.css">
 </head>
 
 <body>
 
-	<div id="animation"></div>
+	<div class="main-component">
+		<div class="side-panel">
+			<label for="number" class="label">enter value: </label>
+			<input type="number" min="1" max="6" class="input" id="number" name="number">
+		</div>
+		<div id="animation"></div>
+	</div>
 
-	<label for="number">Enter value: </label>
-	<input type="number" min="1" max="6" id="number" name="number" value="0">
 
 	<script src="./build/three.js"></script>
 	<script src="./js/libs/stats.min.js"></script>
