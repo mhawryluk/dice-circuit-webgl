@@ -1,6 +1,8 @@
 let container, controls;
 let camera, scene, renderer, light;
 
+const textureLoader = new THREE.TextureLoader()
+
 const clock = new THREE.Clock();
 const inputBox = document.getElementById('number')
 
@@ -96,8 +98,8 @@ function createGround() {
     mesh.position.x = - Math.PI / 2;
     // mesh.position.y -= 50;
 
-    const texture = THREE.ImageUtils.loadTexture("textures/CircuitBoard_512_albedo.png");
-    const normalTexture = THREE.ImageUtils.loadTexture("textures/metal-floor.jpg");
+    const texture = textureLoader.load("textures/CircuitBoard_512_albedo.png");
+    const normalTexture = textureLoader.load("textures/metal-floor.jpg");
     mesh.material.map = texture;
     mesh.material.normalMap = normalTexture;
 
@@ -112,13 +114,12 @@ function createSkyBox() {
     let materialArray = [];
     for (let j = 0; j < 6; j++)
         materialArray.push(new THREE.MeshPhongMaterial({
-            map: THREE.ImageUtils.loadTexture("./textures/Scifi_Panel8_512_albedo.png"),
+            map: textureLoader.load("./textures/Scifi_Panel8_512_albedo.png"),
             // normalMap: THREE.ImageUtils.loadTexture("textures/Scifi_Panel8_512_normal.png"),
             side: THREE.BackSide,
         }));
 
-    var skyMaterial = new THREE.MeshFaceMaterial(materialArray);
-    var skyBox = new THREE.Mesh(skyGeometry, skyMaterial);
+    var skyBox = new THREE.Mesh(skyGeometry, materialArray);
 
     skyBox.position.x += 100
     skyBox.position.y += 100
@@ -145,8 +146,8 @@ function createControls() {
 function createMesh(geom, imageFile, normal) {
 
     if (normal) {
-        var t = THREE.ImageUtils.loadTexture("./textures/" + imageFile);
-        var m = THREE.ImageUtils.loadTexture("./textures/" + normal);
+        var t = textureLoader.load("./textures/" + imageFile);
+        var m = textureLoader.load("./textures/" + normal);
 
         // console.log(t, m)
         var mat2 = new THREE.MeshPhongMaterial({
@@ -159,7 +160,7 @@ function createMesh(geom, imageFile, normal) {
         // console.log(mesh)
         return mesh;
     } else {
-        var t = THREE.ImageUtils.loadTexture("./textures/" + imageFile);
+        var t = textureLoader.load("./textures/" + imageFile);
         var mat1 = new THREE.MeshPhongMaterial({
             map: t
         })
