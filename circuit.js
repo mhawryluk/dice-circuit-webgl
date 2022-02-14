@@ -6,7 +6,7 @@ const vertices = []
 const gates = []
 
 
-const voltageColors = [0x202020, 0x11DD11]
+const voltageColors = [0x0e0e1b, 0x22b455]
 
 class Vertex {
     constructor(i, j, k = 0) {
@@ -133,6 +133,7 @@ function initCircuit(scene) {
 
 function updateCircuit() {
 
+    if (counter % 2 == 0)
     // propagate voltage through edge 
     for (let edge of edges) {
         for (let i = 0; i < edge.spheres.length - 1; i++) {

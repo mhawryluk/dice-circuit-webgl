@@ -62,15 +62,15 @@ function initDice() {
 
 
     const vertexInput = [
-        vertices[17],
-        vertices[20],
-        vertices[23],
+        vertices[31],
+        vertices[34],
+        vertices[37],
         null,
-        vertices[21],
+        vertices[35],
         null,
-        vertices[18],
-        vertices[19],
-        vertices[22],
+        vertices[32],
+        vertices[33],
+        vertices[36],
     ]
 
     for (let i = 0; i < 3; i++) {

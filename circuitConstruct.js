@@ -40,22 +40,22 @@ vertices.push(new Vertex(6, 15)) //22
 vertices.push(new Vertex(2, 16)) //23
 
 
-vertices.push(new Vertex(6, 10, level1)) //17
-vertices.push(new Vertex(2, 11, level1)) //18
-vertices.push(new Vertex(10, 12, level1)) //19
-vertices.push(new Vertex(10, 13, level1)) //20
-vertices.push(new Vertex(12, 14, level1)) //21
-vertices.push(new Vertex(6, 15, level1)) //22
-vertices.push(new Vertex(2, 16, level1)) //23
+vertices.push(new Vertex(6, 10, level1)) //24
+vertices.push(new Vertex(2, 11, level1)) //25
+vertices.push(new Vertex(10, 12, level1)) //26
+vertices.push(new Vertex(10, 13, level1)) //27
+vertices.push(new Vertex(12, 14, level1)) //28
+vertices.push(new Vertex(6, 15, level1)) //29
+vertices.push(new Vertex(2, 16, level1)) //30
 
 
-vertices.push(new Vertex(backx, 10, level1)) //17
-vertices.push(new Vertex(backx, 11, level1)) //18
-vertices.push(new Vertex(backx, 12, level1)) //19
-vertices.push(new Vertex(backx, 13, level1)) //20
-vertices.push(new Vertex(backx, 14, level1)) //21
-vertices.push(new Vertex(backx, 15, level1)) //22
-vertices.push(new Vertex(backx, 16, level1)) //23
+vertices.push(new Vertex(backx, 10, level1)) //31
+vertices.push(new Vertex(backx, 11, level1)) //32
+vertices.push(new Vertex(backx, 12, level1)) //33
+vertices.push(new Vertex(backx, 13, level1)) //34
+vertices.push(new Vertex(backx, 14, level1)) //35
+vertices.push(new Vertex(backx, 15, level1)) //36
+vertices.push(new Vertex(backx, 16, level1)) //37
 
 // GATES
 
