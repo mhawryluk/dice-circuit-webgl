@@ -1,5 +1,5 @@
 const cubeSize = 10;
-const squareSize = 10;
+const squareSize = 20;
 
 const positions = [new THREE.Vector3(4 * squareSize, cubeSize / 2, 0), new THREE.Vector3(8 * squareSize, cubeSize / 2, 0), new THREE.Vector3(12 * squareSize, cubeSize / 2, 0)];
 const boxes = []

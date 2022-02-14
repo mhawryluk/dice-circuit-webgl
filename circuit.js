@@ -6,7 +6,7 @@ const vertices = []
 const gates = []
 
 
-const voltageColors = [0x202020, 0x00DD00]
+const voltageColors = [0x202020, 0x11DD11]
 
 class Vertex {
     constructor(i, j, k = 0) {
@@ -21,6 +21,9 @@ class Vertex {
         this.outEdges = []
         this.gate = null
         this.voltage = 0
+
+        this.light = new THREE.PointLight(voltageColors[1], 0, 10)
+        this.light.position.set(this.x, this.y, this.z)
     }
 
     addOutEdge(vertex) {
@@ -60,7 +63,7 @@ function getVertex(i, j, k) {
 
 function initCircuit(scene) {
 
-    const radius = 2
+    const radius = 3
     const boxGeometry = new THREE.BoxGeometry(3 * squareSize, squareSize, squareSize)
     const sphereGeometry = new THREE.SphereGeometry(2, 10, 6)
 
@@ -85,8 +88,9 @@ function initCircuit(scene) {
                 dist = from.x - to.x
 
                 for (let x = from.x - radius; x >= to.x + radius; x -= 2 * radius + 5) {
-                    // const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
-                    const mesh = createMesh(sphereGeometry, "Plastic_albedo.png", "Plastic_normal.png")
+                    const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
+                    const mesh = new THREE.Mesh(sphereGeometry, material)
+                    // const mesh = createMesh(sphereGeometry, "Plastic_albedo.png", "Plastic_normal.png")
                     mesh.position.set(x, from.y, from.z)
                     scene.add(mesh)
                     edge.spheres.push(mesh)
@@ -95,8 +99,9 @@ function initCircuit(scene) {
                 dist = to.x - from.x
 
                 for (let x = from.x + radius; x <= to.x - radius; x += 2 * radius + 5) {
-                    // const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
-                    const mesh = createMesh(sphereGeometry, "Plastic_albedo.png", "Plastic_normal.png")
+                    const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
+                    const mesh = new THREE.Mesh(sphereGeometry, material)
+                    // const mesh = createMesh(sphereGeometry, "Plastic_albedo.png", "Plastic_normal.png")
                     mesh.position.set(x, from.y, from.z)
                     scene.add(mesh)
                     edge.spheres.push(mesh)
@@ -105,8 +110,9 @@ function initCircuit(scene) {
             }
         } else if (from.z != to.z) {
             for (let z = from.z + radius; z <= to.z - radius; z += 2 * radius + 5) {
-                // const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
-                const mesh = createMesh(sphereGeometry, "Plastic_albedo.png", "Plastic_normal.png")
+                const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
+                const mesh = new THREE.Mesh(sphereGeometry, material)
+                // const mesh = createMesh(sphereGeometry, "Plastic_albedo.png", "Plastic_normal.png")
                 mesh.position.set(from.x, from.y, z)
                 scene.add(mesh)
                 edge.spheres.push(mesh)
@@ -115,7 +121,8 @@ function initCircuit(scene) {
         } else if (from.y != to.y) {
             for (let y = from.y + radius; y <= to.y - radius; y += 2 * radius + 5) {
                 const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
-                const mesh = createMesh(sphereGeometry, "Plastic_albedo.png", "Plastic_normal.png")
+                const mesh = new THREE.Mesh(sphereGeometry, material)
+                // const mesh = createMesh(sphereGeometry, "Plastic_albedo.png", "Plastic_normal.png")
                 mesh.position.set(from.x, y, from.z)
                 scene.add(mesh)
                 edge.spheres.push(mesh)

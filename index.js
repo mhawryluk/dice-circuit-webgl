@@ -6,6 +6,8 @@ const textureLoader = new THREE.TextureLoader()
 const clock = new THREE.Clock();
 const inputBox = document.getElementById('number')
 
+let counter = 0
+
 let binaryBoxes;
 let value = 0;
 
@@ -33,11 +35,15 @@ function init() {
 
     // const axesHelper = new THREE.AxesHelper(500);
     // scene.add(axesHelper);
+
+    // clock.start()
 }
 
 
 function animate() {
 
+    counter++;
+    if (counter % 500 == 0) console.log(camera)
     requestAnimationFrame(animate);
 
     updateCircuit();
@@ -65,9 +71,9 @@ function cameraInit() {
     // camera.lookAt( 0, 0, 0); // or the origin
 
 
-    camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
-    camera.position.set(-139, 174, -50);
-    camera.rotation.set(-2.72, -1, -2.77);
+    camera = new THREE.PerspectiveCamera(55, 1, 1, 1500);
+    camera.position.set(-141, 158, -127);
+    camera.rotation.set(-2.7420254950766147, -0.795000662793939953, -2.848803611924398);
 }
 
 function lightsInit() {
@@ -121,7 +127,7 @@ function createSkyBox() {
 
     var skyBox = new THREE.Mesh(skyGeometry, materialArray);
 
-    skyBox.position.x += 100
+    skyBox.position.x += 150
     skyBox.position.y += 100
     skyBox.position.z += 100
 
