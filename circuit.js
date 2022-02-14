@@ -40,6 +40,7 @@ class Edge {
         this.from = vertexA
         this.to = vertexB
         this.spheres = []
+        this.lights = []
     }
 }
 
@@ -59,7 +60,7 @@ function getVertex(i, j, k) {
 
 function initCircuit(scene) {
 
-    const radius = 1
+    const radius = 2
     const boxGeometry = new THREE.BoxGeometry(3 * squareSize, squareSize, squareSize)
     const sphereGeometry = new THREE.SphereGeometry(2, 10, 6)
 
@@ -84,7 +85,7 @@ function initCircuit(scene) {
                 dist = from.x - to.x
 
                 for (let x = from.x - radius; x >= to.x + radius; x -= 2 * radius + 5) {
-                    const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
+                    // const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
                     const mesh = createMesh(sphereGeometry, "Plastic_albedo.png", "Plastic_normal.png")
                     mesh.position.set(x, from.y, from.z)
                     scene.add(mesh)
@@ -94,20 +95,22 @@ function initCircuit(scene) {
                 dist = to.x - from.x
 
                 for (let x = from.x + radius; x <= to.x - radius; x += 2 * radius + 5) {
-                    const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
+                    // const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
                     const mesh = createMesh(sphereGeometry, "Plastic_albedo.png", "Plastic_normal.png")
                     mesh.position.set(x, from.y, from.z)
                     scene.add(mesh)
                     edge.spheres.push(mesh)
+
                 }
             }
         } else if (from.z != to.z) {
             for (let z = from.z + radius; z <= to.z - radius; z += 2 * radius + 5) {
-                const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
+                // const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
                 const mesh = createMesh(sphereGeometry, "Plastic_albedo.png", "Plastic_normal.png")
                 mesh.position.set(from.x, from.y, z)
                 scene.add(mesh)
                 edge.spheres.push(mesh)
+
             }
         } else if (from.y != to.y) {
             for (let y = from.y + radius; y <= to.y - radius; y += 2 * radius + 5) {

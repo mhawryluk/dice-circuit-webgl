@@ -69,8 +69,14 @@ function cameraInit() {
 }
 
 function lightsInit() {
-    light = new THREE.HemisphereLight(0xffffff, 0x444444);
-    light.position.set(0, 200, 0);
+    // light = new THREE.HemisphereLight(0xffffff, 0x444444);
+    // light.position.set(0, 200, 0);
+    // light.intensity = .5
+    // scene.add(light);
+
+
+    light = new THREE.AmbientLight(0x444444);
+    light.intensity = .7
     scene.add(light);
 
     light = new THREE.DirectionalLight(0xffffff);
@@ -105,10 +111,10 @@ function createSkyBox() {
 
     let materialArray = [];
     for (let j = 0; j < 6; j++)
-        materialArray.push(new THREE.MeshBasicMaterial({
-            map: THREE.ImageUtils.loadTexture("textures/Scifi_Panel8_512_albedo.png"),
-            normalMap: THREE.ImageUtils.loadTexture("textures/Scifi_Panel8_512_normal.png"),
-            side: THREE.BackSide
+        materialArray.push(new THREE.MeshPhongMaterial({
+            map: THREE.ImageUtils.loadTexture("./textures/Scifi_Panel8_512_albedo.png"),
+            // normalMap: THREE.ImageUtils.loadTexture("textures/Scifi_Panel8_512_normal.png"),
+            side: THREE.BackSide,
         }));
 
     var skyMaterial = new THREE.MeshFaceMaterial(materialArray);
@@ -139,20 +145,21 @@ function createControls() {
 function createMesh(geom, imageFile, normal) {
 
     if (normal) {
-        var t = THREE.ImageUtils.loadTexture("textures/" + imageFile);
-        var m = THREE.ImageUtils.loadTexture("textures/" + normal);
+        var t = THREE.ImageUtils.loadTexture("./textures/" + imageFile);
+        var m = THREE.ImageUtils.loadTexture("./textures/" + normal);
 
         // console.log(t, m)
         var mat2 = new THREE.MeshPhongMaterial({
             map: t,
-            normalMap: m
+            normalMap: m,
+            transparent: true
         });
 
         var mesh = new THREE.Mesh(geom, mat2);
         // console.log(mesh)
         return mesh;
     } else {
-        var t = THREE.ImageUtils.loadTexture("textures/" + imageFile);
+        var t = THREE.ImageUtils.loadTexture("./textures/" + imageFile);
         var mat1 = new THREE.MeshPhongMaterial({
             map: t
         })
