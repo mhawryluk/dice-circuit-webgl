@@ -64,9 +64,11 @@ function initCircuit() {
 
     const radius = 3
     const boxGeometry = new THREE.BoxGeometry(3 * squareSize, squareSize, squareSize)
+    const space = Math.floor(squareSize / 4)
+    console.log(space)
 
     for (let gate of gates) {
-        const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
+        // const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
         // const mesh = new THREE.Mesh(boxGeometry, material)
         const mesh = createMesh(boxGeometry, "CircuitBoard_512_albedo.png", "CircuitBoard_512_normal.png")
 
@@ -76,29 +78,37 @@ function initCircuit() {
         scene.add(mesh)
     }
 
+
     for (let edge of edges) {
         let from = edge.from
         let to = edge.to
 
         if (from.x != to.x) {
             if (from.x > to.x)
-                for (let x = from.x - radius - 5; x >= to.x; x -= 2 * radius + 5)
+                for (let x = from.x - space; x >= to.x; x -= space)
                     createElectron(x, from.y, from.z, edge)
             else
-                for (let x = from.x + radius + 5; x <= to.x; x += 2 * radius + 5)
+                for (let x = from.x + space; x <= to.x; x += space)
                     createElectron(x, from.y, from.z, edge)
         }
 
         else if (from.z != to.z) {
-            for (let z = from.z + radius + 5; z <= to.z; z += 2 * radius + 5)
-                createElectron(from.x, from.y, z, edge)
+            if (from.z < to.z)
+                for (let z = from.z + space; z <= to.z; z += space)
+                    createElectron(from.x, from.y, z, edge)
+            else
+                for (let z = from.z - space; z >= to.z; z -= space)
+                    createElectron(from.x, from.y, z, edge)
         }
 
         else if (from.y != to.y) {
-            for (let y = from.y + radius + 5; y <= to.y; y += 2 * radius + 5)
-                createElectron(from.x, y, from.z, edge)
+            if (from.y < to.y)
+                for (let y = from.y + space; y <= to.y; y += space)
+                    createElectron(from.x, y, from.z, edge)
+            else
+                for (let y = from.y - space; y >= to.y; y -= space)
+                    createElectron(from.x, y, from.z, edge)
         }
-
     }
 }
 
@@ -114,16 +124,15 @@ function createElectron(x, y, z, edge) {
 }
 
 function updateCircuit() {
-    if (counter % 2 == 0)
-        // propagate voltage through edge 
-        for (let edge of edges) {
-            for (let i = 0; i < edge.spheres.length - 1; i++) {
-                if (edge.spheres[i].material.color.getHex() != edge.spheres[i + 1].material.color.getHex()) {
-                    edge.spheres[i + 1].material.color.copy(edge.spheres[i].material.color);
-                    break;
-                }
+    // propagate voltage through edge 
+    for (let edge of edges) {
+        for (let i = 0; i < edge.spheres.length - 1; i++) {
+            if (edge.spheres[i].material.color.getHex() != edge.spheres[i + 1].material.color.getHex()) {
+                edge.spheres[i + 1].material.color.copy(edge.spheres[i].material.color);
+                break;
             }
         }
+    }
 
     // copy voltage on nodes
     for (let vertex of vertices) {

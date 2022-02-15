@@ -1,6 +1,6 @@
 const diceDots = []
 const diceColors = [0x010101, 0xff0000]
-const diceWidth = 120, diceHeight = 120
+const diceWidth = 125, diceHeight = 125
 const centerPos = new THREE.Vector3(15 * squareSize + diceWidth / 2, level1 * squareSize + diceHeight / 2 - 10, 13 * squareSize)
 
 class Dot {
