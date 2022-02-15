@@ -5,14 +5,14 @@ function cameraInit() {
 }
 
 function lightsInit() {
-    light = new THREE.AmbientLight(0x444444);
-    light.intensity = 1.5
-    scene.add(light);
+    light = new THREE.AmbientLight(0xffffff);
+    light.intensity = .5
+    // scene.add(light);
 
-    light = new THREE.DirectionalLight(0xffffff);
+    light = new THREE.SpotLight(0xffffff);
     light.position.set(-141, 158, -127);
     light.rotation.set(-2.7420254950766147, -0.795000662793939953, -2.848803611924398);
-    light.intensity = .5
+    light.intensity = 1
     scene.add(light);
 }
 
