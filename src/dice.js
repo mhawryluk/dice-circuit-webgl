@@ -46,8 +46,19 @@ class Dot {
 
 function initDice() {
     const boxGeometry = new THREE.BoxGeometry(diceWidth, diceHeight, diceWidth)
-    const boxMesh = createMesh(boxGeometry, "CircuitBoard_512_albedo.png", "CircuitBoard_512_normal.png")
+    const albedo = textureLoader.load("../textures/CircuitBoard_512_albedo.png");
+    const normal = textureLoader.load("../textures/CircuitBoard_512_normal.png");
+    const metallic = textureLoader.load("../textures/CircuitBoard_512_metallic.png");
+    const roughness = textureLoader.load("../textures/CircuitBoard_512_roughness.png");
 
+    const mat2 = new THREE.MeshStandardMaterial({
+            map: albedo,
+            normalMap: normal,
+            metalnessMap: metallic,
+            roughnessMap: roughness,
+        });
+
+    const boxMesh = new THREE.Mesh(boxGeometry, mat2);
     boxMesh.position.copy(centerPos)
     boxMesh.material.reflectivity = 0
 
