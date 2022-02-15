@@ -26,7 +26,7 @@ function createSkyBox() {
     for (let j = 0; j < 6; j++)
         materialArray.push(new THREE.MeshPhongMaterial({
             map: textureLoader.load("./textures/Scifi_Panel8_512_albedo.png"),
-            // normalMap: THREE.ImageUtils.loadTexture("textures/Scifi_Panel8_512_normal.png"),
+            normalMap: textureLoader.load("./textures/Scifi_Panel8_512_normal.png"),
             side: THREE.BackSide,
         }));
 
