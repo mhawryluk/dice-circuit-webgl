@@ -1,6 +1,6 @@
 const diceDots = []
 const diceColors = [0x010101, 0xff0000]
-const diceWidth = 100, diceHeight = 100
+const diceWidth = 120, diceHeight = 120
 const centerPos = new THREE.Vector3(15 * squareSize + diceWidth / 2, level1 * squareSize + diceHeight / 2 - 10, 13 * squareSize)
 
 class Dot {
@@ -8,7 +8,7 @@ class Dot {
         this.input = input
         this.voltage = 0
 
-        this.radius = 7
+        this.radius = 9
         const sphereGeometry = new THREE.SphereGeometry(this.radius, 10, 6)
         const material = new THREE.MeshBasicMaterial({ color: diceColors[0] })
         // const mesh = createMesh(sphereGeometry, "Plastic_Scratched_512_albedo.png", "Plastic_Scratched_512_normal.png")
@@ -46,8 +46,6 @@ class Dot {
 }
 
 function initDice() {
-
-
     const boxGeometry = new THREE.BoxGeometry(diceWidth, diceHeight, diceWidth)
     // const material = new THREE.MeshBasicMaterial({ color: 0x111111 })
 

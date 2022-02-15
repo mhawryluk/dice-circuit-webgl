@@ -1,14 +1,11 @@
-let container, controls;
-let camera, scene, renderer, light;
-
 const textureLoader = new THREE.TextureLoader()
-
 const clock = new THREE.Clock();
 const inputBox = document.getElementById('number')
+const container = document.getElementById('animation');
+const scene = new THREE.Scene();
 
+let camera, renderer, light, controls;
 let counter = 0
-
-let binaryBoxes;
 let value = 0;
 
 init();
@@ -16,18 +13,14 @@ animate();
 
 function init() {
 
-    container = document.getElementById('animation');
-
-    scene = new THREE.Scene();
-
     cameraInit();
     lightsInit();
 
     // createGround();
     createSkyBox();
 
-    initBoxes(scene);
-    initCircuit(scene);
+    initBoxes();
+    initCircuit();
     initDice();
 
     createRenderer();

@@ -5,7 +5,7 @@ const positions = [new THREE.Vector3(4 * squareSize, cubeSize / 2, 0), new THREE
 const boxes = []
 const lights = []
 
-function initBoxes(scene) {
+function initBoxes() {
     let cubeGeom = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
 
     for (let i = 0; i < 3; i++) {
@@ -17,7 +17,8 @@ function initBoxes(scene) {
         // let cube = new THREE.Mesh(cubeGeom, cubeMaterial)
         const cube = createMesh(cubeGeom, "CircuitBoard_512_albedo.png", "CircuitBoard_512_normal.png")
         cube.position.copy(positions[i])
-        cube.material.opacity = 0.7
+        cube.material.opacity = 1
+        cube.material.color.set(0x222222)
         scene.add(cube)
         boxes.push(cube)
 
@@ -31,21 +32,20 @@ function initBoxes(scene) {
 }
 
 function setValueBoxes(value) {
-
     for (let i = 0; i < boxes.length; i++) {
         let color;
 
         if ((value & Math.pow(2, boxes.length - i - 1)) == 0) {
             color = 0x222222
             lights[i].intensity = 0;
+            boxes[i].opacity = 1
         }
         else {
             color = 0xFFFFFF
             lights[i].intensity = 10;
             boxes[i].voltage = 1;
+            boxes[i].opacity = .5
         }
-
-        // value = Math.floor(value / 2)
 
         boxes[i].material.color.set(color)
     }
