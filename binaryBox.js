@@ -15,7 +15,7 @@ function initBoxes() {
         // });
 
         // let cube = new THREE.Mesh(cubeGeom, cubeMaterial)
-        const cube = createMesh(cubeGeom, "CircuitBoard_512_albedo.png", "CircuitBoard_512_normal.png")
+        const cube = createMesh(cubeGeom, "box_texture.png", null, "box_bump.png")
         cube.position.copy(positions[i])
         cube.material.opacity = 1
         cube.material.color.set(0x222222)
