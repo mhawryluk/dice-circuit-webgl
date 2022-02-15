@@ -11,7 +11,6 @@ class Dot {
         this.radius = 9
         const sphereGeometry = new THREE.SphereGeometry(this.radius, 10, 6)
         const material = new THREE.MeshBasicMaterial({ color: diceColors[0] })
-        // const mesh = createMesh(sphereGeometry, "Plastic_Scratched_512_albedo.png", "Plastic_Scratched_512_normal.png")
         const mesh = new THREE.Mesh(sphereGeometry, material)
 
         this.x = centerPos.x - diceWidth / 2
@@ -24,7 +23,7 @@ class Dot {
 
         mesh.material.opacity = 0.8
         mesh.castShadow = true
-        // console.log(mesh)
+
         scene.add(mesh)
         this.sphere = mesh
 
@@ -47,11 +46,7 @@ class Dot {
 
 function initDice() {
     const boxGeometry = new THREE.BoxGeometry(diceWidth, diceHeight, diceWidth)
-    // const material = new THREE.MeshBasicMaterial({ color: 0x111111 })
-
-    // const boxMesh = new THREE.Mesh(boxGeometry, material)
     const boxMesh = createMesh(boxGeometry, "CircuitBoard_512_albedo.png", "CircuitBoard_512_normal.png")
-    // const boxMesh = createMesh(boxGeometry, "metal-floor.jpg", "metal-floor-normal.jpg")
 
     boxMesh.position.copy(centerPos)
     boxMesh.material.reflectivity = 0

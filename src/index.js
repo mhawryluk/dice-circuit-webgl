@@ -1,11 +1,10 @@
 const textureLoader = new THREE.TextureLoader()
-const clock = new THREE.Clock();
+const clock = new THREE.Clock()
 const inputBox = document.getElementById('number')
-const container = document.getElementById('animation');
-const scene = new THREE.Scene();
+const container = document.getElementById('animation')
+const scene = new THREE.Scene()
 
 let camera, renderer, light, controls;
-let counter = 0
 let value = 0;
 
 init();
@@ -16,7 +15,6 @@ function init() {
     cameraInit();
     lightsInit();
 
-    // createGround();
     createSkyBox();
 
     initBoxes();
@@ -30,8 +28,6 @@ function init() {
 
 
 function animate() {
-
-    counter++;
     requestAnimationFrame(animate);
 
     updateCircuit();

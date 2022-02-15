@@ -7,7 +7,6 @@ function cameraInit() {
 function lightsInit() {
     light = new THREE.AmbientLight(0xffffff);
     light.intensity = .5
-    // scene.add(light);
 
     light = new THREE.SpotLight(0xffffff);
     light.position.set(-141, 158, -127);
@@ -53,7 +52,6 @@ function createMesh(geom, imageFile, normal, bump) {
         var t = textureLoader.load("../textures/" + imageFile);
         var m = textureLoader.load("../textures/" + normal);
 
-        // console.log(t, m)
         var mat2 = new THREE.MeshPhongMaterial({
             map: t,
             normalMap: m,
@@ -61,13 +59,11 @@ function createMesh(geom, imageFile, normal, bump) {
         });
 
         var mesh = new THREE.Mesh(geom, mat2);
-        // console.log(mesh)
         return mesh;
     } else if (bump) {
         var t = textureLoader.load("../textures/" + imageFile);
         var b = textureLoader.load("../textures/" + bump);
 
-        // console.log(t, m)
         var mat2 = new THREE.MeshPhongMaterial({
             map: t,
             bumpMap: b,
@@ -75,7 +71,6 @@ function createMesh(geom, imageFile, normal, bump) {
         });
 
         var mesh = new THREE.Mesh(geom, mat2);
-        // console.log(mesh)
         return mesh;
     }
     else {

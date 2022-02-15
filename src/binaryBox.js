@@ -9,12 +9,6 @@ function initBoxes() {
     let cubeGeom = new THREE.BoxGeometry(cubeSize, cubeSize, cubeSize);
 
     for (let i = 0; i < 3; i++) {
-
-        // var cubeMaterial = new THREE.MeshBasicMaterial({
-        //     color: 0x222222
-        // });
-
-        // let cube = new THREE.Mesh(cubeGeom, cubeMaterial)
         const cube = createMesh(cubeGeom, "box_texture.png", null, "box_bump.png")
         cube.position.copy(positions[i])
         cube.material.opacity = 1

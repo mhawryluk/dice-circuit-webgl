@@ -114,7 +114,6 @@ const sphereGeometry = new THREE.SphereGeometry(2, 10, 6)
 function createElectron(x, y, z, edge) {
     const material = new THREE.MeshBasicMaterial({ color: voltageColors[0] })
     const mesh = new THREE.Mesh(sphereGeometry, material)
-    // const mesh = createMesh(sphereGeometry, "Plastic_albedo.png", "Plastic_normal.png")
     mesh.position.set(x, y, z)
     scene.add(mesh)
     edge.spheres.push(mesh)
