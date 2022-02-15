@@ -25,8 +25,8 @@ function createSkyBox() {
     let materialArray = [];
     for (let j = 0; j < 6; j++)
         materialArray.push(new THREE.MeshPhongMaterial({
-            map: textureLoader.load("./textures/Scifi_Panel8_512_albedo.png"),
-            normalMap: textureLoader.load("./textures/Scifi_Panel8_512_normal.png"),
+            map: textureLoader.load("../textures/Scifi_Panel8_512_albedo.png"),
+            normalMap: textureLoader.load("../textures/Scifi_Panel8_512_normal.png"),
             side: THREE.BackSide,
         }));
 
@@ -50,8 +50,8 @@ function createRenderer() {
 
 function createMesh(geom, imageFile, normal, bump) {
     if (normal) {
-        var t = textureLoader.load("./textures/" + imageFile);
-        var m = textureLoader.load("./textures/" + normal);
+        var t = textureLoader.load("../textures/" + imageFile);
+        var m = textureLoader.load("../textures/" + normal);
 
         // console.log(t, m)
         var mat2 = new THREE.MeshPhongMaterial({
@@ -64,8 +64,8 @@ function createMesh(geom, imageFile, normal, bump) {
         // console.log(mesh)
         return mesh;
     } else if (bump) {
-        var t = textureLoader.load("./textures/" + imageFile);
-        var b = textureLoader.load("./textures/" + bump);
+        var t = textureLoader.load("../textures/" + imageFile);
+        var b = textureLoader.load("../textures/" + bump);
 
         // console.log(t, m)
         var mat2 = new THREE.MeshPhongMaterial({
@@ -79,7 +79,7 @@ function createMesh(geom, imageFile, normal, bump) {
         return mesh;
     }
     else {
-        var t = textureLoader.load("./textures/" + imageFile);
+        var t = textureLoader.load("../textures/" + imageFile);
         var mat1 = new THREE.MeshPhongMaterial({
             map: t
         })
