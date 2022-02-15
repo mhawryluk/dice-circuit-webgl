@@ -14,9 +14,9 @@ class Gate {
 
     update() {
         if (this.type == 'AND') {
-            this.out.voltage = this.in1.voltage && this.in2.voltage
+            this.out.voltage = this.in1.voltage & this.in2.voltage
         } else if (this.type == 'OR') {
-            this.out.voltage = this.in1.voltage || this.in2.voltage
+            this.out.voltage = this.in1.voltage | this.in2.voltage
         }
     }
 }
