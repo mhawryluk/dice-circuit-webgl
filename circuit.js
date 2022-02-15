@@ -114,7 +114,7 @@ function initCircuit() {
 const sphereGeometry = new THREE.SphereGeometry(2, 10, 6)
 
 function createElectron(x, y, z, edge) {
-    const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
+    const material = new THREE.MeshBasicMaterial({ color: voltageColors[0] })
     const mesh = new THREE.Mesh(sphereGeometry, material)
     // const mesh = createMesh(sphereGeometry, "Plastic_albedo.png", "Plastic_normal.png")
     mesh.position.set(x, y, z)
@@ -122,15 +122,25 @@ function createElectron(x, y, z, edge) {
     edge.spheres.push(mesh)
 }
 
+let deltaSum = 0;
+let delta = 0;
+
 function updateCircuit() {
-    // propagate voltage through edge 
-    for (let edge of edges) {
-        for (let i = 0; i < edge.spheres.length - 1; i++) {
-            if (edge.spheres[i].material.color.getHex() != edge.spheres[i + 1].material.color.getHex()) {
-                edge.spheres[i + 1].material.color.copy(edge.spheres[i].material.color);
-                break;
+
+    delta = clock.getDelta()
+    deltaSum += delta
+    if (deltaSum > 0.015) {
+        // propagate voltage through edge 
+        for (let edge of edges) {
+            for (let i = 0; i < edge.spheres.length - 1; i++) {
+                if (edge.spheres[i].material.color.getHex() != edge.spheres[i + 1].material.color.getHex()) {
+                    edge.spheres[i + 1].material.color.copy(edge.spheres[i].material.color);
+                    break;
+                }
             }
         }
+
+        deltaSum = 0;
     }
 
     // copy voltage on nodes
