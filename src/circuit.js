@@ -64,8 +64,6 @@ function initCircuit() {
 
     const boxGeometry = new THREE.BoxGeometry(3 * squareSize, squareSize, squareSize)
     const space = Math.floor(squareSize / 4)
-    console.log(space)
-
 
     let mesh = createMesh(boxGeometry, 'or_gate.png', null, 'or_bump.png')
     mesh.position.set(gates[0].x, gates[0].y, gates[0].z)

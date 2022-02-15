@@ -24,19 +24,14 @@ function init() {
     initDice();
 
     createRenderer();
-    createControls();
 
-    // const axesHelper = new THREE.AxesHelper(500);
-    // scene.add(axesHelper);
-
-    // clock.start()
+    clock.start()
 }
 
 
 function animate() {
 
     counter++;
-    // if (counter % 500 == 0) console.log(camera)
     requestAnimationFrame(animate);
 
     updateCircuit();
@@ -51,7 +46,6 @@ function animate() {
     }
     renderer.render(scene, camera);
 
-    // console.log(camera);
 }
 
 
