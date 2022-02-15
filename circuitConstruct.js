@@ -49,13 +49,13 @@ vertices.push(new Vertex(6, 15, level1)) //29
 vertices.push(new Vertex(2, 16, level1)) //30
 
 
-vertices.push(new Vertex(backx, 10, level1)) //31
-vertices.push(new Vertex(backx, 11, level1)) //32
-vertices.push(new Vertex(backx, 12, level1)) //33
-vertices.push(new Vertex(backx, 13, level1)) //34
-vertices.push(new Vertex(backx, 14, level1)) //35
-vertices.push(new Vertex(backx, 15, level1)) //36
-vertices.push(new Vertex(backx, 16, level1)) //37
+vertices.push(new Vertex(backX, 10, level1)) //31
+vertices.push(new Vertex(backX, 11, level1)) //32
+vertices.push(new Vertex(backX, 12, level1)) //33
+vertices.push(new Vertex(backX, 13, level1)) //34
+vertices.push(new Vertex(backX, 14, level1)) //35
+vertices.push(new Vertex(backX, 15, level1)) //36
+vertices.push(new Vertex(backX, 16, level1)) //37
 
 vertices.push(new Vertex(7, 3))
 vertices.push(new Vertex(7, 3, .5))
@@ -98,13 +98,13 @@ addEdge(12, 14, 0, 12, 14, level1)
 addEdge(6, 15, 0, 6, 15, level1)
 addEdge(2, 16, 0, 2, 16, level1)
 
-addEdge(6, 10, level1, backx, 10, level1)
-addEdge(2, 11, level1, backx, 11, level1)
-addEdge(10, 12, level1, backx, 12, level1)
-addEdge(10, 13, level1, backx, 13, level1)
-addEdge(12, 14, level1, backx, 14, level1)
-addEdge(6, 15, level1, backx, 15, level1)
-addEdge(2, 16, level1, backx, 16, level1)
+addEdge(6, 10, level1, backX, 10, level1)
+addEdge(2, 11, level1, backX, 11, level1)
+addEdge(10, 12, level1, backX, 12, level1)
+addEdge(10, 13, level1, backX, 13, level1)
+addEdge(12, 14, level1, backX, 14, level1)
+addEdge(6, 15, level1, backX, 15, level1)
+addEdge(2, 16, level1, backX, 16, level1)
 
 addEdge(7, 2, 0, 7, 3, 0)
 addEdge(7, 3, 0, 7, 3, .5)

@@ -1,5 +1,5 @@
 const level1 = 4
-const backx = 15
+const backX = 15
 
 const edges = []
 const vertices = []
@@ -62,21 +62,20 @@ function getVertex(i, j, k) {
 
 function initCircuit() {
 
-    const radius = 3
     const boxGeometry = new THREE.BoxGeometry(3 * squareSize, squareSize, squareSize)
     const space = Math.floor(squareSize / 4)
     console.log(space)
 
-    for (let gate of gates) {
-        // const material = new THREE.MeshBasicMaterial({ color: 0x888888 })
-        // const mesh = new THREE.Mesh(boxGeometry, material)
-        const mesh = createMesh(boxGeometry, "CircuitBoard_512_albedo.png", "CircuitBoard_512_normal.png")
 
-        mesh.position.set(gate.x, gate.y, gate.z)
+    let mesh = createMesh(boxGeometry, 'or_gate.png', null, 'or_bump.png')
+    mesh.position.set(gates[0].x, gates[0].y, gates[0].z)
+    gates[0].box = mesh
+    scene.add(mesh)
 
-        gate.box = mesh
-        scene.add(mesh)
-    }
+    mesh = createMesh(boxGeometry, 'and_gate.png', null, 'and_bump.png')
+    mesh.position.set(gates[1].x, gates[1].y, gates[1].z)
+    gates[1].box = mesh
+    scene.add(mesh)
 
 
     for (let edge of edges) {

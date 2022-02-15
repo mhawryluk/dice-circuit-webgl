@@ -20,7 +20,7 @@ function lightsInit() {
 function createSkyBox() {
 
     let size = 512
-    let skyGeometry = new THREE.CubeGeometry(size, size*.75, size);
+    let skyGeometry = new THREE.CubeGeometry(size, size * .75, size);
 
     let materialArray = [];
     for (let j = 0; j < 6; j++)
@@ -54,7 +54,7 @@ function createControls() {
     controls.update();
 }
 
-function createMesh(geom, imageFile, normal) {
+function createMesh(geom, imageFile, normal, bump) {
     if (normal) {
         var t = textureLoader.load("./textures/" + imageFile);
         var m = textureLoader.load("./textures/" + normal);
@@ -69,7 +69,22 @@ function createMesh(geom, imageFile, normal) {
         var mesh = new THREE.Mesh(geom, mat2);
         // console.log(mesh)
         return mesh;
-    } else {
+    } else if (bump) {
+        var t = textureLoader.load("./textures/" + imageFile);
+        var b = textureLoader.load("./textures/" + bump);
+
+        // console.log(t, m)
+        var mat2 = new THREE.MeshPhongMaterial({
+            map: t,
+            bumpMap: b,
+            transparent: true
+        });
+
+        var mesh = new THREE.Mesh(geom, mat2);
+        // console.log(mesh)
+        return mesh;
+    }
+    else {
         var t = textureLoader.load("./textures/" + imageFile);
         var mat1 = new THREE.MeshPhongMaterial({
             map: t
